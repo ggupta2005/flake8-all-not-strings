@@ -1,6 +1,5 @@
-import sys
-
 import ast
+import sys
 from typing import Any, Generator, List, Tuple, Type
 
 if sys.version_info < (3, 8):  # pragma: no cover (<PY38)

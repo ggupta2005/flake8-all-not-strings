@@ -1,6 +1,8 @@
 import ast
-from flake8_all_not_strings import Plugin
 from typing import Set
+
+from flake8_all_not_strings import Plugin
+
 
 def get_results(s: str) -> Set[str]:
     tree = ast.parse(s)
