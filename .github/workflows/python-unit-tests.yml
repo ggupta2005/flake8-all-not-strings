@@ -55,7 +55,6 @@ jobs:
         run: |
           pip list
 
-      # TODO: Check for flake8_all_not_strings in the output
       - name: Dump flake8 version command
         run: |
           flake8 --version

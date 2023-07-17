@@ -1,5 +1,6 @@
 import ast
 from typing import Set
+import subprocess
 
 from flake8_all_not_strings import Plugin
 
@@ -11,6 +12,14 @@ def get_results(s: str) -> Set[str]:
 
 
 class TestFlake8AllNotStrings:
+    def test_flake8_all_not_strings_in_flake8_command(self):
+        command = "flake8 --version"
+        result = subprocess.run(
+            command, shell=True, capture_output=True, text=True
+        )
+        assert result.returncode == 0
+        assert "flake8-all-not-strings" in result.stdout
+
     def test_flake8_all_not_strings(self):
         assert get_results("") == set()
         assert get_results("__all__ = [\nsomething,\nsomething_else]") == set(
