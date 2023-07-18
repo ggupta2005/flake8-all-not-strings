@@ -39,5 +39,5 @@ class Plugin:
         visitor = Visitor()
         visitor.visit(self._tree)
         for line, col in visitor.errors:
-            yield line, col, "ANS100: Some imports under all are not strings.", type(self)
+            yield line, col, "ANS100: Some imports under __all__ are not strings.", type(self)
 

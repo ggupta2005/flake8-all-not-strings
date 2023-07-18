@@ -24,7 +24,7 @@ class TestFlake8AllNotStrings:
         assert get_results("") == set()
         assert get_results("__all__ = [\nsomething,\nsomething_else]") == set(
             [
-                '3:0: ANS100: Some imports under all are not strings.',
-                '2:0: ANS100: Some imports under all are not strings.'
+                '3:0: ANS100: Some imports under __all__ are not strings.',
+                '2:0: ANS100: Some imports under __all__ are not strings.'
             ]
         )
