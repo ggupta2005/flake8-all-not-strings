@@ -18,7 +18,9 @@ class Visitor(ast.NodeVisitor):
         if hasattr(node.targets[0], 'id') and node.targets[0].id == '__all__':
             for element in node.value.elts:
                 if isinstance(element, ast.Name):
-                    self.errors.append((element.lineno, element.col_offset))
+                    self.errors.append(
+                        (element.lineno, element.col_offset, element.id)
+                    )
         self.generic_visit(node)
 
 
@@ -32,6 +34,7 @@ class Plugin:
     def run(self) -> Generator[Tuple[int, int, str, Type[Any]], None, None]:
         visitor = Visitor()
         visitor.visit(self._tree)
-        for line, col in visitor.errors:
-            yield line, col, "ANS100: Some imports under __all__ " + \
-                             "are not strings.", type(self)
+        for line, col, element_name in visitor.errors:
+            yield line, col, ("ANS100: '{0}' import under __all__"
+                              " is not a string.").format(
+                                    element_name), type(self)
