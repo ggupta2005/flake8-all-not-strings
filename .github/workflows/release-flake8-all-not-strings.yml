@@ -29,6 +29,10 @@ jobs:
       - name: install flake8-all-not-strings wheel locally
         run: find ./dist/ -name '*.whl' -exec pip install {} \;
 
+      - name: Install test requirements
+        run: |
+          pip install pytest
+
       # run tests before publishing to PyPI
       - name: run flake8-all-not-strings tests
         run: pytest ./tests/
