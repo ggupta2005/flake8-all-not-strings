@@ -9,4 +9,4 @@ pip install flake8-all-not-strings
 ## Flake8 codes
 | Code | description |
 |----------|----------|
-| ANS100 | Some imports under `__all__` are not strings |
+| ANS100 | '<<some_module_name>>' import under __all__ is not a string. |
