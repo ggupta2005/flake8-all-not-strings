@@ -1,0 +1,42 @@
+name: Release flake8-all-not-strings to PyPI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release-flake8-all-not-strings:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      - name: update and upgrade pip, setuptools, wheel, and twine
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade setuptools wheel twine
+
+      - name: pip freeze
+        run: pip freeze
+
+      - name: build wheel for flake8-all-not-strings
+        run: python setup.py sdist bdist_wheel
+
+      - name: install flake8-all-not-strings wheel locally
+        run: find ./dist/ -name '*.whl' -exec pip install {} \;
+
+      # run tests before publishing to PyPI
+      - name: run flake8-all-not-strings tests
+        run: pytest ./tests/
+
+      # publish to PyPI
+      - name: Publish flake8-all-not-strings package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN_FLAKE8_ALL_NOT_STRINGS }}
+          packages_dir: ./dist/
