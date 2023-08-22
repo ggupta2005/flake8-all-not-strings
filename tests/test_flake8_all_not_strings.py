@@ -1,6 +1,6 @@
 import ast
-from typing import Set
 import subprocess
+from typing import Set
 
 from flake8_all_not_strings import Plugin
 
