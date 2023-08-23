@@ -22,10 +22,13 @@ class TestFlake8AllNotStrings:
 
     def test_flake8_all_not_strings(self):
         assert get_results("") == set()
-        assert get_results("__all__ = [\nsomething,\nsomething_else]") == set(
+        assert get_results(
+            "__all__ = [\nsomething,\nsomething_else, something_else_else]") == set(
             [
                 "3:0: ANS100: 'something_else' import under __all__ is not a "
                 "string.",
+                "3:16: ANS100: 'something_else_else' import under __all__ "
+                "is not a string.",
                 "2:0: ANS100: 'something' import under __all__ is not a string."
             ]
         )
