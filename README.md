@@ -1,5 +1,6 @@
 # flake8-all-not-strings
 ![PyPI data-understand](https://img.shields.io/pypi/v/flake8-all-not-strings)
+![Downloads](https://static.pepy.tech/badge/flake8-all-not-strings)
 [![Python Linting](https://github.com/ggupta2005/flake8-all-not-strings/actions/workflows/python-linting.yml/badge.svg)](https://github.com/ggupta2005/flake8-all-not-strings/actions/workflows/python-linting.yml)
 [![Run Python Unit Tests](https://github.com/ggupta2005/flake8-all-not-strings/actions/workflows/python-unit-tests.yml/badge.svg)](https://github.com/ggupta2005/flake8-all-not-strings/actions/workflows/python-unit-tests.yml)
 
