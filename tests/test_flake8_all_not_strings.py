@@ -13,12 +13,8 @@ def get_results(s: str) -> Set[str]:
 
 class TestFlake8AllNotStrings:
     def test_flake8_all_not_strings_in_flake8_command(self):
-        command = "flake8 --version"
-        result = subprocess.run(
-            command, shell=True, capture_output=True, text=True
-        )
-        assert result.returncode == 0
-        assert "flake8-all-not-strings" in result.stdout
+        result = str(subprocess.check_output(["flake8", "--version"]))
+        assert "flake8-all-not-strings" in result
 
     def test_flake8_all_not_strings(self):
         assert get_results("") == set()
