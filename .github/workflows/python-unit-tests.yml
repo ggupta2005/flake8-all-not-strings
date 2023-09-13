@@ -46,3 +46,9 @@ jobs:
       - name: Run tests
         run: |
           pytest --durations=10
+
+      - name: Check package consistency with twine
+        run: |
+          pip install twine wheel
+          python setup.py check sdist bdist_wheel
+          twine check dist/*
