@@ -49,6 +49,6 @@ jobs:
 
       - name: Check package consistency with twine
         run: |
-          pip install twine
+          pip install twine wheel
           python setup.py check sdist bdist_wheel
           twine check dist/*
