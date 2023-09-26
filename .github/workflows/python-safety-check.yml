@@ -21,7 +21,7 @@ jobs:
       with:
         python-version: 3.x
 
-      Install your python dependencies
+      # Install your python dependencies
       - name: Install python package or dependencies
         run: |
           pip install -e .
