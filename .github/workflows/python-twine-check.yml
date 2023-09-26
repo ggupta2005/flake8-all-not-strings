@@ -1,0 +1,27 @@
+name: Python Twine Check
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install wheel and twine
+        run: |
+          pip install twine wheel
+
+      - name: Check package consistency with twine
+        run: |
+          python setup.py check sdist bdist_wheel
+          twine check dist/*
