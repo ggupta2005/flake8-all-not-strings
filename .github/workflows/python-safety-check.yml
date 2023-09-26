@@ -13,25 +13,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.x
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
 
       # Install your python dependencies
       - name: Install python package or dependencies
         run: |
           pip install -e .
 
-    - name: Upgrade setuptools
-      run: pip install --upgrade setuptools
+      - name: Upgrade setuptools
+        run: pip install --upgrade setuptools
 
-    - name: Install safety
-      run: pip install safety
+      - name: Install safety
+        run: pip install safety
 
-    - name: Run Safety Check
-      run: |
-        safety check
+      - name: Run Safety Check
+        run: |
+          safety check
