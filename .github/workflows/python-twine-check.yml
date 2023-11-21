@@ -17,9 +17,9 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install wheel and twine
+      - name: Install wheel, twine and setuptools
         run: |
-          pip install twine wheel
+          pip install twine wheel setuptools
 
       - name: Check package consistency with twine
         run: |
