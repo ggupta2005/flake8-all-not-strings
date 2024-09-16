@@ -36,3 +36,23 @@ pip install flake8-all-not-strings
 | Code | description |
 |----------|----------|
 | ANS100 | '<<some_module_name>>' import under __all__ is not a string. |
+
+## Testing
+In order to run unit tests under the `tests/` directory you can do the following steps:-
+
+### Install editable version of `flake8-all-not-strings` from the top level directory
+```
+pip install -e .
+```
+
+### Install `pytest`
+```
+pip install pytest
+```
+
+### Run tests
+Change to `tests/` directory and run tests using `pytest`
+```
+cd tests/
+pytest
+```
