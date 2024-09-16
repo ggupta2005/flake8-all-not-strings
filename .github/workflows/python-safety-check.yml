@@ -34,7 +34,7 @@ jobs:
         run: pip install --upgrade setuptools
 
       - name: Pin jinja2
-        run: pip install jinja2<3.1.4
+        run: pip install Jinja2==3.1.3
 
       - name: Install safety
         run: pip install safety
