@@ -50,7 +50,9 @@ class Plugin:
         Run the plugin to find non-string elements in __all__ assignments.
 
         Yields:
-            Tuple[int, int, str, Type[Any]]: Line, column, error message, and plugin type.
+            Tuple[int, int, str, Type[Any]]: Line, column,
+                                             error message
+                                             and plugin type.
         """
         visitor = Visitor()
         visitor.visit(self._tree)
