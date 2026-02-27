@@ -15,7 +15,7 @@ class Visitor(ast.NodeVisitor):
         """Initialize the Visitor with an empty list to store errors."""
         self.errors: List[Tuple[int, int]] = []
 
-    def visit_Assign(self, node: ast.List) -> None:
+    def visit_Assign(self, node: ast.Assign) -> None:
         """
         Visit assignment nodes and check if the assignment is to __all__.
         If so, record any elements in __all__ that are not strings.
@@ -24,12 +24,31 @@ class Visitor(ast.NodeVisitor):
             node (ast.List): The assignment node to visit.
         """
         if hasattr(node.targets[0], 'id') and node.targets[0].id == '__all__':
-            for element in node.value.elts:
+            for element in getattr(node.value, 'elts', []):
                 if isinstance(element, ast.Name):
                     self.errors.append(
                         (element.lineno, element.col_offset, element.id)
                     )
+                elif not isinstance(element, ast.Str) and not (hasattr(ast, 'Constant') and isinstance(element, ast.Constant) and isinstance(element.value, str)):
+                    self.errors.append(
+                        (element.lineno, element.col_offset, getattr(element, 'id', repr(element)))
+                    )
         self.generic_visit(node)
+
+    def visit_AugAssign(self, node: ast.AugAssign) -> None:
+        if hasattr(node.target, 'id') and node.target.id == '__all__':
+            if isinstance(node.value, ast.List):
+                for element in node.value.elts:
+                    if isinstance(element, ast.Name):
+                        self.errors.append(
+                            (element.lineno, element.col_offset, element.id)
+                        )
+                    elif not isinstance(element, ast.Str) and not (hasattr(ast, 'Constant') and isinstance(element, ast.Constant) and isinstance(element.value, str)):
+                        self.errors.append(
+                            (element.lineno, element.col_offset, getattr(element, 'id', repr(element)))
+                        )
+        self.generic_visit(node)
+
 
 
 class Plugin:
