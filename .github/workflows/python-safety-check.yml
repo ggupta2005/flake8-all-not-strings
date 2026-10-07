@@ -9,7 +9,7 @@ on:
 
 jobs:
   security-scan:
-    name: Run Safety Check
+    name: Run Security Scan
     runs-on: ubuntu-latest
 
     steps:
@@ -25,20 +25,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
 
-      # Install your python dependencies
       - name: Install python package or dependencies
         run: |
           pip install -e .
 
-      - name: Upgrade setuptools
-        run: pip install --upgrade setuptools
+      - name: Install pip-audit
+        run: pip install pip-audit
 
-      - name: Pin jinja2
-        run: pip install Jinja2==3.1.2
-
-      - name: Install safety
-        run: pip install safety
-
-      - name: Run Safety Check
+      - name: Run pip-audit
         run: |
-          safety check
+          pip-audit
