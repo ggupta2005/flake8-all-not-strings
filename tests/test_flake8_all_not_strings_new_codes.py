@@ -20,7 +20,10 @@ class TestANS101:
 
     def test_single_duplicate(self):
         results = get_results('__all__ = ["foo", "bar", "foo"]')
-        assert any("ANS101: 'foo' is a duplicate entry in __all__." in r for r in results)
+        assert any(
+            "ANS101: 'foo' is a duplicate entry in __all__." in r
+            for r in results
+        )
 
     def test_multiple_duplicates(self):
         results = get_results('__all__ = ["a", "b", "a", "b"]')
